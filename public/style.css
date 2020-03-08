@@ -20,7 +20,8 @@ button {
   cursor: pointer;
 }
 
-.gothenburg {
-  margin-top: 100px;
-  border: 5px solid rgba(0, 0, 0, 0.575);
+.time {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
 }
