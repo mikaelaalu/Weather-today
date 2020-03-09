@@ -4,9 +4,18 @@ function getHours(addHours) {
   const result = hours + addHours;
 
   if (result > 23) {
-    return result - 24;
+    const time = result - 24;
+    return `0${time}`;
   } else {
     return result;
+  }
+}
+
+function getMinutes(minutes) {
+  if (minutes < 10) {
+    return `0${minutes}`;
+  } else {
+    return minutes;
   }
 }
 

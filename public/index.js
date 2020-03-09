@@ -25,10 +25,10 @@ let hours = today.getHours();
 let minutes = today.getMinutes();
 
 const todayDate = `${dd}/${mm}/${yyyy}`;
-timeNow.textContent = hours + ":" + minutes;
-timeFour.textContent = getHours(4) + ":" + minutes;
-timeEigth.textContent = getHours(8) + ":" + minutes;
-timeTwelve.textContent = getHours(12) + ":" + minutes;
+timeNow.textContent = getHours(0) + ":" + getMinutes(minutes);
+timeFour.textContent = getHours(4) + ":" + getMinutes(minutes);
+timeEigth.textContent = getHours(8) + ":" + getMinutes(minutes);
+timeTwelve.textContent = getHours(12) + ":" + getMinutes(minutes);
 
 date.textContent = todayDate;
 
@@ -36,7 +36,7 @@ let longitude;
 let latitude;
 longitude = "11.98883";
 latitude = "57.701212";
-const proxy = "https://cors-anywhere.herokuapp.com/";
+
 let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
 
 getForecast(url);
@@ -51,7 +51,6 @@ cities.addEventListener("change", e => {
     let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
     clean();
     getForecast(url);
-    console.log("sthlm" + latitude + longitude);
   }
   if (city == "gothenburg") {
     selectedCity.textContent = "Gothenburg";
@@ -60,7 +59,6 @@ cities.addEventListener("change", e => {
     let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
     clean();
     getForecast(url);
-    console.log("gbg" + longitude + latitude);
   }
   if (city == "malmo") {
     selectedCity.textContent = "Malmö";
@@ -69,6 +67,5 @@ cities.addEventListener("change", e => {
     let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
     clean();
     getForecast(url);
-    console.log("malmo" + longitude + latitude);
   }
 });
