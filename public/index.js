@@ -11,61 +11,28 @@ const eight = document.querySelector(".eight");
 const twelve = document.querySelector(".twelve");
 
 const cities = document.querySelector(".cities");
-
 const selectedCity = document.querySelector(".selected-city");
+const date = document.querySelector(".date");
+
+const locationBtn = document.querySelector(".location-btn");
 
 const today = new Date();
 const dd = today.getDate();
 const mm = today.getMonth() + 1;
 const yyyy = today.getFullYear();
 
-const date = document.querySelector(".date");
-
 let hours = today.getHours();
 let minutes = today.getMinutes();
-
 const todayDate = `${dd}/${mm}/${yyyy}`;
-timeNow.textContent = getHours(0) + ":" + getMinutes(minutes);
-timeFour.textContent = getHours(4) + ":" + getMinutes(minutes);
-timeEigth.textContent = getHours(8) + ":" + getMinutes(minutes);
-timeTwelve.textContent = getHours(12) + ":" + getMinutes(minutes);
 
 date.textContent = todayDate;
 
-let longitude;
-let latitude;
-longitude = "11.98883";
-latitude = "57.701212";
-
+let longitude = "11.98883";
+let latitude = "57.701212";
 let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
 
+displayTime();
 getForecast(url);
 
-cities.addEventListener("change", e => {
-  const city = cities.options[cities.selectedIndex].value;
-  e.preventDefault();
-  if (city == "stockholm") {
-    selectedCity.textContent = "Stockholm";
-    longitude = "18.039464";
-    latitude = "59.305729";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
-  if (city == "gothenburg") {
-    selectedCity.textContent = "Gothenburg";
-    longitude = "11.98883";
-    latitude = "57.701212";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
-  if (city == "malmo") {
-    selectedCity.textContent = "Malmö";
-    longitude = "13.015505";
-    latitude = "55.590908";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
-});
+locationBtn.addEventListener("click", getLocation);
+cities.addEventListener("change", chooseCity);

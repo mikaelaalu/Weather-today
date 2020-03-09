@@ -19,6 +19,13 @@ function getMinutes(minutes) {
   }
 }
 
+function displayTime() {
+  timeNow.textContent = getHours(0) + ":" + getMinutes(minutes);
+  timeFour.textContent = getHours(4) + ":" + getMinutes(minutes);
+  timeEigth.textContent = getHours(8) + ":" + getMinutes(minutes);
+  timeTwelve.textContent = getHours(12) + ":" + getMinutes(minutes);
+}
+
 function getForecast(url) {
   displayWeather(0, now, url);
   displayWeather(3, four, url);
@@ -117,4 +124,51 @@ function displayWeather(clock, where, url) {
 
     where.appendChild(div);
   });
+}
+
+function chooseCity() {
+  const city = cities.options[cities.selectedIndex].value;
+
+  if (city == "stockholm") {
+    selectedCity.textContent = "Stockholm";
+    longitude = "18.039464";
+    latitude = "59.305729";
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+    clean();
+    getForecast(url);
+  }
+  if (city == "gothenburg") {
+    selectedCity.textContent = "Gothenburg";
+    longitude = "11.98883";
+    latitude = "57.701212";
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+    clean();
+    getForecast(url);
+  }
+  if (city == "malmo") {
+    selectedCity.textContent = "Malmö";
+    longitude = "13.015505";
+    latitude = "55.590908";
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+    clean();
+    getForecast(url);
+  }
+}
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Not working");
+  }
+}
+
+function showPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  selectedCity.textContent = "Current position";
+  clean();
+
+  let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+  getForecast(url);
 }
