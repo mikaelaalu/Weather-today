@@ -10,7 +10,14 @@ function getHours(addHours) {
   }
 }
 
-function getWeather(time) {
+function getForecast(url) {
+  displayWeather(0, now, url);
+  displayWeather(3, four, url);
+  displayWeather(7, eight, url);
+  displayWeather(11, twelve, url);
+}
+
+function getWeather(time, url) {
   return fetch(url)
     .then(response => response.json())
     .then(json => {
@@ -31,37 +38,35 @@ function getWeather(time) {
       switch (weatherSymbol) {
         case 1:
         case 2:
-          weatherSituation = "Sun";
+          weatherSituation = "sun";
           break;
         case 3:
         case 4:
-          weatherSituation = "Some clouds";
+          weatherSituation = "some-clouds";
           break;
         case 5:
         case 6:
-          weatherSituation = "Cloudy";
+        case 7:
+          weatherSituation = "cloudy";
           break;
 
-        case 7:
-          weatherSituation = "Fog";
-          break;
         case 8:
         case 9:
         case 12:
         case 13:
         case 18:
         case 19:
-          weatherSituation = "Moderate rain";
+          weatherSituation = "rain";
           break;
         case 10:
         case 14:
         case 19:
         case 20:
-          weatherSituation = "Heavy rain";
+          weatherSituation = "rainy";
           break;
         case 21:
         case 11:
-          weatherSituation = "Thunderstorm";
+          weatherSituation = "thunder";
           break;
 
         case 15:
@@ -70,29 +75,35 @@ function getWeather(time) {
         case 23:
         case 25:
         case 26:
-          weatherSituation = "Moderate snow";
-          break;
         case 17:
         case 24:
         case 27:
-          weatherSituation = "Heavy snow";
+          weatherSituation = "snow";
           break;
 
         default:
           break;
       }
-      const temaplate = `<p>Temprature: ${currentTemp} </p>
-        <p> Weather: ${weatherSituation} </p>`;
+      const temaplate = `<p>Temprature: ${currentTemp}°C </p>
+       <img class="weather-icon" src="images/${weatherSituation}.png" alt=""> `;
       return temaplate;
     });
 }
 
-function displayWeather(clock, where) {
+function clean() {
+  now.innerHTML = "";
+  four.innerHTML = "";
+  eight.innerHTML = "";
+  twelve.innerHTML = "";
+}
+
+function displayWeather(clock, where, url) {
   const time = clock;
-  const template = getWeather(time);
+  const template = getWeather(time, url);
 
   template.then(function(result) {
     let div = document.createElement("div");
+
     div.innerHTML = result;
 
     where.appendChild(div);
