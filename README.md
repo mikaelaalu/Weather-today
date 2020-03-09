@@ -1,7 +1,9 @@
 # Weather-today
 What's the weather today?
 
-A weather-app to practise javascript fetch.
+<img src="https://media.giphy.com/media/13yEAnhSlgFP8I/giphy.gif">  </img>
+
+A weather-app just for fun with javascript fetch and using SMHI api.
 
 
 ## User stories
