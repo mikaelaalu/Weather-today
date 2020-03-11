@@ -1,5 +1,23 @@
 "use strict";
 
+const citiesArray = {
+  stockholm: {
+    name: "Stockholm",
+    longitude: "18.039464",
+    latitude: "59.305729"
+  },
+  gothenburg: {
+    name: "Gothenburg",
+    longitude: "11.98883",
+    latitude: "57.701212"
+  },
+  malmo: {
+    name: "Malmö",
+    longitude: "13.015505",
+    latitude: "55.590908"
+  }
+};
+
 function getHours(addHours) {
   const result = hours + addHours;
 
@@ -129,30 +147,12 @@ function displayWeather(clock, where, url) {
 function chooseCity() {
   const city = cities.options[cities.selectedIndex].value;
 
-  if (city == "stockholm") {
-    selectedCity.textContent = "Stockholm";
-    longitude = "18.039464";
-    latitude = "59.305729";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
-  if (city == "gothenburg") {
-    selectedCity.textContent = "Gothenburg";
-    longitude = "11.98883";
-    latitude = "57.701212";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
-  if (city == "malmo") {
-    selectedCity.textContent = "Malmö";
-    longitude = "13.015505";
-    latitude = "55.590908";
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    clean();
-    getForecast(url);
-  }
+  selectedCity.textContent = citiesArray[city].name;
+  longitude = citiesArray[city].longitude;
+  latitude = citiesArray[city].latitude;
+  let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+  clean();
+  getForecast(url);
 }
 
 function getLocation() {
